@@ -5,7 +5,19 @@ RSpec.describe RussiaToday do
     expect(RussiaToday::VERSION).not_to be nil
   end
 
-  it 'does something useful' do
-    expect(false).to eq(true)
+  describe '#holiday?' do
+    subject { date.holiday? }
+
+    context 'with holiday' do
+      let(:date) { Date.new(2017, 6, 12) }
+
+      it { is_expected.to be_truthy }
+    end
+
+    context 'with workday' do
+      let(:date) { Date.new(2017, 6, 13) }
+
+      it { is_expected.to be_falsey }
+    end
   end
 end
